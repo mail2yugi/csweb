@@ -8,14 +8,14 @@ React + flux + Typescript + tight tslint error + Theme base project which demons
     2. npm start
 
 # Them
-  1. red 
-  2. blue- default 
+    1. red 
+    2. blue- default 
   
 # Public api
-  https://docs.thecatapi.com/api-reference/breeds/breeds-list
-  1. List
-  2. Image
+    https://docs.thecatapi.com/api-reference/breeds/breeds-list
+    1. List
+    2. Image
   
 # Shared components
-  1. BreadCrumbs
-  2. Loader
+    1. BreadCrumbs
+    2. Loader

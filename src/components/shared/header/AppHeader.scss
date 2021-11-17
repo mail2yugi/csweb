@@ -1,0 +1,28 @@
+.app-header {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 28px;
+    height: 50px;
+}
+
+.app-header .container {
+    position: absolute;
+    margin: 8px;
+    width: 90%;
+}
+
+.app-header .container .right{
+    float: right;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.app-header .container .right .red{
+    color: #970303;
+    margin: 5px;
+}
+
+.app-header .container .right .default{
+    margin: 5px;
+}

@@ -10,8 +10,7 @@ React + flux + Typescript + tight tslint error + Theme base project which demons
 # Them
   1. red 
   2. blue- default 
-
-
+  
 # Public api
   https://docs.thecatapi.com/api-reference/breeds/breeds-list
   1. List

@@ -4,8 +4,8 @@ React + flux + Typescript + tight tslint error + Theme base project which demons
 
 
 # run
-  # npm i
-  # npm start
+    1. npm i
+    2. npm start
 
 # Them
   # red 

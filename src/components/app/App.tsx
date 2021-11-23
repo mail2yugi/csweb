@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
+import 'react-toastify/dist/ReactToastify.css';
 import AuthAction from "../../actions/AuthAction";
 import AuthStore from "../../stores/AuthStore";
 import AppHeader from "../shared/header/AppHeader";
 import Pages from "../pages/pages";
 import BreadCrumbs from "../shared/breadcrumbs/BredCrumbs";
+import { ToastContainer } from 'react-toastify';
 
 const App: React.FC = () => {
 
@@ -24,6 +26,7 @@ const App: React.FC = () => {
 
     return (
         <div className="app">
+            <ToastContainer />
             <AppHeader apiKey={appKey} />
             <BreadCrumbs apiKey={appKey} />
             <Pages apiKey={appKey} />

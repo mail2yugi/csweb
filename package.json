@@ -6,11 +6,18 @@
   "scripts": {
     "start": "webpack-cli serve --mode=development --env development --open --hot",
     "build": "webpack --mode=production --env production --progress",
-    "lint": "eslint src/**/*.{ts,tsx} --quiet --fix"
+    "lint": "eslint src/**/*.{ts,tsx} --quiet --fix",
+    "test": "jest --coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "jest": {
+    "moduleNameMapper": {
+      "verbose": true,
+      "^.+\\.(css|less|scss)$": "identity-obj-proxy"
+    }
+  },
   "dependencies": {
     "@types/react-redux": "^7.1.20",
     "axios": "^0.24.0",
@@ -21,9 +28,14 @@
     "keymirror": "^0.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-toastify": "^8.1.0",
     "ts-loader": "^9.2.6"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@types/jest": "^27.0.3",
     "@types/node": "^16.11.7",
     "@types/react": "^17.0.34",
     "@types/react-dom": "^17.0.11",
@@ -36,6 +48,9 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-react": "^7.27.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.3.1",
+    "jsdom": "^18.1.1",
     "node-sass": "^6.0.1",
     "sass-loader": "^12.3.0",
     "style-loader": "^3.3.1",

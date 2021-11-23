@@ -22,13 +22,20 @@ const BreedDetails: React.FC<CatBreedsListProps> = (props: CatBreedsListProps) =
         setShowLoader(false);
     }
 
+    const shopLoading = () => {
+        setBreedDetails(null);
+        setShowLoader(false);
+    }
+
     useEffect(() => {
         CatsStore.addChangeListener('breed-details', getBreedDetails);
+        CatsStore.addChangeListener('breed-details-error', shopLoading);
         AuthAction.updateBreadCrumbList({ apiKey: props.apiKey, links: ["Home", "BreedsList", props.breedName] });
         CatsActions.getBreedDetails({ apiKey: props.apiKey, id: props.beedId });
         setShowLoader(true);
         return () => {
             CatsStore.removeChangeListener('breed-details', getBreedDetails);
+            CatsStore.removeChangeListener('breed-details-error', shopLoading);
         }
     }, [])
 

@@ -25,23 +25,31 @@ const CatBreedsList: React.FC<CatBreedsListProps> = (props: CatBreedsListProps) 
         setIsLoading(false);
     }
 
+    const stopLoading = () => {
+        setBreedsList([]);
+        setIsLoading(false);
+    }
+
     const breaCrumbClick = () => {
         setShowDetails(false);
+        setTimeout(() => {
+            AuthAction.updateBreadCrumbList({ apiKey: props.apiKey, links: ["Home", "BreedsList"] });
+        });
     }
 
     useEffect(() => {
         AuthStore.addChangeListener('notify-breadcrumb-click', breaCrumbClick);
         CatsStore.addChangeListener('breed-list', breedList);
-        if (props.apiKey && breedsList && breedsList.length === 0) {
-            AuthAction.updateBreadCrumbList({ apiKey: props.apiKey, links: ["Home", "BreedsList"] });
-            CatsActions.getListOfBreeds({ apiKey: props.apiKey });
-            setIsLoading(true);
-        }
+        CatsStore.addChangeListener('breed-list-error', stopLoading);
+        AuthAction.updateBreadCrumbList({ apiKey: props.apiKey, links: ["Home", "BreedsList"] });
+        CatsActions.getListOfBreeds({ apiKey: props.apiKey });
+        setIsLoading(true);
         return () => {
             CatsStore.removeChangeListener('breed-list', breedList);
+            CatsStore.removeChangeListener('breed-list-error', stopLoading);
             AuthStore.removeChangeListener('notify-breadcrumb-click', breaCrumbClick);
         }
-    })
+    }, [])
 
     const viewDetails = (id, name) => {
         setShowDetails(true);
@@ -49,11 +57,7 @@ const CatBreedsList: React.FC<CatBreedsListProps> = (props: CatBreedsListProps) 
         setBeedName(name);
     }
 
-    const loadBreadCrumbs = () => {
-        AuthAction.updateBreadCrumbList({ apiKey: props.apiKey, links: ["Home", "BreedsList"] });
-    }
-
-    const deleteBreed= () => {
+    const deleteBreed = () => {
         alert("Sorry! Cant delete the Breed as its public data.")
     }
 
@@ -76,7 +80,7 @@ const CatBreedsList: React.FC<CatBreedsListProps> = (props: CatBreedsListProps) 
                     </td>
                     <td data-label="action">
                         <span className="margin12">
-                            <i className="fas fa-eye" onClick={viewDetails.bind(null, breed.id, breed.name)}></i>
+                            <i className="fas fa-eye" onClick={viewDetails.bind(null, breed.id, breed.name)} id={`edit_${index}`}></i>
                             <i className="fas fa-trash-alt" onClick={deleteBreed}></i>
                         </span>
                     </td>
@@ -90,7 +94,6 @@ const CatBreedsList: React.FC<CatBreedsListProps> = (props: CatBreedsListProps) 
             {isLoading ? <AppLoader /> :
                 showDetails ? <BreedDetails apiKey={props.apiKey} beedId={breedId} breedName={breedName} /> :
                     <>
-                        {loadBreadCrumbs()}
                         <h3>Breeds List ({breedsList.length})</h3>
                         <table className="flex-table flex-fixhead-table">
                             <thead>
@@ -105,6 +108,8 @@ const CatBreedsList: React.FC<CatBreedsListProps> = (props: CatBreedsListProps) 
                             </thead>
                             <tbody>
                                 {renderList()}
+                                {breedsList && breedsList.length === 0 ?
+                                    <tr><td className="no-data">No records found!</td></tr> : null}
                             </tbody>
                         </table>
                     </>

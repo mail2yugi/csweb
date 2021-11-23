@@ -8,8 +8,7 @@ React + flux + Typescript + tight tslint error + Theme base project which demons
     2. npm start
 
 # tests
-    1. npm i
-    2. npm test
+    1. npm test
 
 # Theme
   In Application Header top text (Thme for RED) and Default for blue is displyed if user clicks it will change the color
